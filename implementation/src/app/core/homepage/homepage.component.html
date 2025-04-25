@@ -1,0 +1,42 @@
+<div class="row wrap primary-div" fxLayout.xs="column" fxLayoutAlign="space-around center" fxLayoutGap="25px">
+  <mat-card class="mat-elevation-z4" fxFlex="calc(23%-35px)" fxFlex.sm="calc(40%-25px)">
+    <h2 class="card-title">Step 1</h2>
+    <img [src]="imageUrl" class="display-image" mat-card-image>
+    <mat-card-content>
+      <h3 class="card-description">
+        {{cardDescription}}
+      </h3>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="mat-elevation-z4" fxFlex="calc(23%-35px)" fxFlex.sm="calc(40%-25px)">
+    <h2 class="card-title">Step 2 </h2>
+    <img class="display-image" mat-card-image src="assets/images/form-2.png">
+    <mat-card-content>
+      <h3 class="card-description">
+        Form Generation {{'home.first-paragraph'|translate}}
+      </h3>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="mat-elevation-z4" fxFlex="calc(23%-35px)" fxFlex.sm="calc(40%-25px)">
+    <h2 class="card-title">Step 3 </h2>
+    <img class="display-image new-instance" mat-card-image src="assets/images/new-instance.png">
+    <mat-card-content>
+      <h3 class="card-description">
+        Create New Instance {{'home.first-paragraph'|translate}}
+      </h3>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="mat-elevation-z4" fxFlex="calc(23%-35px)" fxFlex.sm="calc(40%-25px)">
+    <h2 class="card-title">Step 4 </h2>
+    <img class="display-image" mat-card-image src="assets/images/export.png">
+    <mat-card-content>
+      <h3 class="card-description">
+        Export
+      </h3>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<div class="text-center">
+  <button [routerLink]="getStartedUrl" color="primary" mat-raised-button>GET STARTED</button>
+</div>

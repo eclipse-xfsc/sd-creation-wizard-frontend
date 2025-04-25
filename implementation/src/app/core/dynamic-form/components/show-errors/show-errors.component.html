@@ -1,0 +1,12 @@
+<div *ngIf="shouldShowErrors()">
+  <small *ngFor="let error of listOfErrors()">
+    {{error}}
+  </small>
+</div>
+
+
+<div *ngIf="shouldShowShapesErrors()">
+  <small *ngFor="let error of listOfErrors()">
+    {{error}}
+  </small>
+</div>

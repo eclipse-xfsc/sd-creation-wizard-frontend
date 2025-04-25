@@ -1,0 +1,125 @@
+                .outer{
+                    display:grid;
+                    grid-template-columns: 2fr 1.5fr;
+                    font-family: 'Hepta Slab', serif;
+                }
+                body{
+                    font-family: 'Hepta Slab', serif;
+                }
+                .right{
+
+
+                    height: 100vh;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    .line{
+                        width: 2px;
+                        height: 50vh;
+                        background-color: #d3d3d3;
+                        position: absolute;
+                        margin-left: -43%;
+                    }
+                    .heroTitle{
+                        text-align: center;
+                        font-size: 30px;
+                        font-weight: normal;
+                        line-height: 1.3em;
+                    }
+                    .hero{
+                        margin-top: 1.3em;
+
+                        .step{
+                            font-size: 16px;
+                            display: grid;
+                            grid-template-columns: 0.5fr 1fr;
+                            justify-content:center;
+                            align-items: center;
+                            padding-top: 1em;
+                            img{
+
+                            }
+                            p{
+                                margin: 0;
+                            }
+                        }
+                    }
+                }
+                .left{
+
+
+                    display: flex;
+                    flex-direction: column;
+                    justify-content:center;
+                    padding: 3em 17em 0em 12em;
+
+                }
+                .button{
+                    margin-top: 5em;
+                    display: inline-block;
+                    outline: none;
+                    cursor: pointer;
+                    font-size: 1.5em;
+                    line-height: 1;
+                    border-radius: 500px;
+                    transition-property: background-color,border-color,color,box-shadow,filter;
+                    transition-duration: .3s;
+                    border: 1px solid transparent;
+                    letter-spacing: 2px;
+                    min-width: 250px;
+                    text-transform: uppercase;
+                    white-space: normal;
+                    font-weight: 900;
+                    text-align: center;
+                    padding: 0px;
+
+
+                    color: #673AB7;
+                    box-shadow: inset 0 0 0 4px #673AB7;
+                    background-color: transparent;
+                    height: 70px;
+                    :hover{
+                        color: #fff;
+                        background-color: #616467;
+                    }
+                }
+                .headline{
+                    font-size: 3.5em;
+                    letter-spacing:0.8;
+                    font-weight: bold;
+                    color: #673AB7;
+                    line-height: 0.9em;
+                }
+                h2{
+                    padding-right: 3em;
+                    padding-top: 0.3em;
+                    font-size: 1.5em;
+                    font-weight: normal;
+                    line-height: 1.3em;
+
+                }
+                .action{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    font-size: 0.8em;
+                    .details{
+                        max-width: 250px;
+                        text-align: center;
+                        margin-left: 3.8em;
+
+                        a{
+
+                        }
+                    }
+                }
+                .underline{
+
+
+                    border-bottom: 5px solid #673AB7;
+                    display: inline-block;
+                    padding-bottom: 1px;
+
+                }
+

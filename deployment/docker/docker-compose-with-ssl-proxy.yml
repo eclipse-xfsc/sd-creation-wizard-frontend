@@ -1,0 +1,66 @@
+version: '2'
+
+services:
+  frontend_proxy:
+    restart: always
+    image: nginxproxy/nginx-proxy
+    container_name: frontend_proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./certs:/etc/nginx/certs:ro
+      - vhost:/etc/nginx/vhost.d:rw
+      - html:/usr/share/nginx/html:rw
+    networks:
+      - frontend
+
+
+  sd-creation-wizard:
+    restart: always
+    container_name: sd-creation-wizard
+    image: to_be_changed:latest
+    expose:
+      - '80'
+    depends_on:
+      - sd-creation-wizard-api
+    environment:
+      - "API_URL=https://to_be_changed:8443"
+      - 'VIRTUAL_HOST=to_be_changed'
+    networks:
+      - frontend
+
+  sd-creation-wizard-api:
+    restart: always
+    container_name: sd-creation-wizard-api
+    image: to_be_changed2:latest
+    expose:
+      - '8080'
+    environment:
+      - 'VIRTUAL_HOST=to_be_changed'
+    networks:
+      - backend
+
+  backend-proxy:
+    restart: always
+    image: nginxproxy/nginx-proxy
+    container_name: backend_proxy
+    ports:
+      - "8080:8080"
+      - "8443:8443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./certs:/etc/nginx/certs:ro
+    environment:
+      - 'HTTP_PORT=8080'
+      - 'HTTPS_PORT=8443'
+    networks:
+      - backend
+
+volumes:
+  vhost:
+  html:
+networks:
+  frontend:
+  backend:

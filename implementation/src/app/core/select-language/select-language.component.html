@@ -1,0 +1,23 @@
+<!---
+<div class="switch-button">
+
+    <input #saveUserNameCheckBox
+    id="saveUserNameCheckBox" 
+    class="check-toggle check-toggle-round-flat"
+    type="checkbox" 
+    [checked]="saveUsername" 
+    (change)="onSaveUsernameChanged(saveUserNameCheckBox.checked)"
+    
+     />
+    <label class="switch-button-label" for=""><span class="switch-button-label-span">EN</span></label>
+</div>
+
+
+-->
+<div class="switch">
+	    <input #saveUserNameCheckBox
+        id="saveUserNameCheckBox"  class="check-toggle check-toggle-round-flat" [checked]="saveUsername" (change)="onSaveUsernameChanged(saveUserNameCheckBox.checked)" type="checkbox">
+	    <label for="saveUserNameCheckBox"></label>
+	    <span class="on">EN</span>
+	    <span class="off">DE</span>
+</div>

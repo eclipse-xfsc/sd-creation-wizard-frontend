@@ -1,0 +1,39 @@
+<form [formGroup]="form">
+  <mat-form-field *ngIf='!isArray' class="full-width-input">
+    <mat-label>{{input.name}} <span *ngIf="input.required" aria-required="true" class="required"> </span></mat-label>
+    <mat-select (selectionChange)="onSelectionChanged($event.value)" [formControlName]="input.id" [multiple]="false">
+      <mat-option *ngFor="let option of input.in" [value]="option.value">
+        {{option.value}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-error>
+    <app-show-errors [ctrl]="form.get(input.id)" [label]="input.name"></app-show-errors>
+  </mat-error>
+
+  <mat-form-field *ngIf='isArray' class="full-width-input">
+    <mat-label>{{input.name}} <span *ngIf="input.required" aria-required="true" class="required"></span></mat-label>
+    <mat-select (selectionChange)="onSelectionChanged($event.value)" [formControl]="control" [multiple]="false">
+      <mat-option *ngFor="let option of input.in" [value]="option.value">
+        {{option.value}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-error>
+    <app-show-errors [ctrl]="control" [label]="input.name"></app-show-errors>
+  </mat-error>
+
+  <div *ngFor="let field of shapeFields">
+    <app-dynamic-form-input *ngIf="field.componentType == 'dynamicFormInput'" [form]="nestedFormGroup" [input]="field"
+                            [shapes]="shapes"></app-dynamic-form-input>
+    <app-dynamic-form-array *ngIf="field.componentType == 'dynamicFormArray'" [form]="nestedFormGroup" [input]="field"
+                            [shapes]="shapes"></app-dynamic-form-array>
+    <app-dynamic-form-or-array *ngIf="field.componentType == 'dynamicFormOrArray'" [form]="nestedFormGroup"
+                               [input]="field" [shapes]="shapes"></app-dynamic-form-or-array>
+    <app-dynamic-form-or *ngIf="field.componentType == 'dynamicFormOr'" [form]="nestedFormGroup" [input]="field"
+                         [shapes]="shapes"></app-dynamic-form-or>
+    <app-expanded-fields *ngIf="field.componentType == 'dynamicExpanded'" [form]="nestedFormGroup" [input]="field"
+                         [shapes]="shapes"></app-expanded-fields>
+  </div>
+
+</form>

@@ -1,0 +1,23 @@
+<div *ngIf="displayButton" class="display-button">
+  {{input.name}}
+  <button (click)="addNestedShape()" color="primary" mat-icon-button type='button'>
+    <mat-icon>add</mat-icon>
+    {{input.name}}
+  </button>
+</div> <br><br>
+<div *ngIf="displayFields">
+  <form [formGroup]="form">
+    <app-dynamic-form-input *ngIf="input.componentType == 'dynamicFormInput'" [form]="form" [input]="input"
+                            [shapes]="shapes"></app-dynamic-form-input>
+    <app-dynamic-form-array *ngIf="input.componentType == 'dynamicFormArray'" [form]="form" [input]="input"
+                            [shapes]="shapes"></app-dynamic-form-array>
+    <app-dynamic-form-or *ngIf="input.componentType == 'dynamicFormOr'" [form]="form" [input]="input"
+                         [shapes]="shapes"></app-dynamic-form-or>
+    <app-dynamic-form-or-array *ngIf="input.componentType == 'dynamicFormOrArray'" [form]="form" [input]="input"
+                               [shapes]="shapes"></app-dynamic-form-or-array>
+    <app-dynamic-self-loops *ngIf="input.componentType == 'dynamicSelfLoop'" [form]="form" [input]="input"
+                            [parentId]=parentId [shapes]="shapes"></app-dynamic-self-loops>
+    <app-expanded-fields *ngIf="input.componentType == 'dynamicExpanded'" [form]="form" [input]="input"
+                         [parentId]=parentId [shapes]="shapes"></app-expanded-fields>
+  </form>
+</div>

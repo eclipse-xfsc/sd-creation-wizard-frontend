@@ -1,0 +1,43 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@components/*": [
+        "src/app/core/dynamic-form/components/*"
+      ],
+      "@services/*": [
+        "src/app/core/dynamic-form/services/*"
+      ],
+      "@models/*": [
+        "src/app/core/dynamic-form/models/*"
+      ],
+      "@validations/*": [
+        "src/app/core/dynamic-form/validations/*"
+      ],
+      "@directives/*": [
+        "src/app/core/dynamic-form/directives/*"
+      ],
+      "@shared/*": [
+        "src/app/shared/*"
+      ]
+    },
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2015",
+    "lib": [
+      "es2018",
+      "dom"
+    ]
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true
+  }
+}

@@ -1,0 +1,206 @@
+{
+  "prefixList": [
+    {
+      "name": "schema",
+      "url": "http://schema.org/"
+    },
+    {
+      "name": "xsd",
+      "url": "http://www.w3.org/2001/XMLSchema#"
+    },
+    {
+      "name": "ex",
+      "url": "http://example.com/ns#"
+    },
+    {
+      "name": "sh",
+      "url": "http://www.w3.org/ns/shacl#"
+    }
+  ],
+  "shapes": [
+    {
+      "schema": "PersonShape",
+      "constraints": [
+        {
+          "path": "phoneNumber",
+          "minCount": 1,
+          "order": 36,
+          "children": "PhoneShape"
+        },
+        {
+          "path": "address",
+          "minCount": 1,
+          "order": 35,
+          "children": "AddressShape"
+        },
+        {
+          "path": "age",
+          "datatype": "integer",
+          "minCount": 1,
+          "maxCount": 1,
+          "order": 34,
+          "validations": [
+            {
+              "key": "maxInclusive",
+              "value": 100
+            },
+            {
+              "key": "minInclusive",
+              "value": 18
+            }
+          ]
+        },
+        {
+          "path": "birthDate",
+          "datatype": "date",
+          "minCount": 1,
+          "maxCount": 1,
+          "order": 33
+        },
+        {
+          "path": "gender",
+          "minCount": 1,
+          "maxCount": 1,
+          "in": [
+            {
+              "key": "female",
+              "value": "female"
+            },
+            {
+              "key": "male",
+              "value": "male"
+            }
+          ],
+          "order": 32
+        },
+        {
+          "path": "givenName",
+          "name": "given name",
+          "datatype": "string",
+          "minCount": 1,
+          "maxCount": 1,
+          "order": 31,
+          "validations": [
+            {
+              "key": "maxLength",
+              "value": 8
+            },
+            {
+              "key": "minLength",
+              "value": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "schema": "HospitalShape",
+      "constraints": [
+        {
+          "path": "person",
+          "order": 4,
+          "children": "PersonShape"
+        },
+        {
+          "path": "phoneNumber",
+          "minCount": 1,
+          "order": 3,
+          "children": "PhoneShape"
+        },
+        {
+          "path": "address",
+          "minCount": 1,
+          "order": 2,
+          "children": "AddressShape"
+        },
+        {
+          "path": "name",
+          "name": "name",
+          "datatype": "string",
+          "minCount": 1,
+          "description": "Name of the hospital",
+          "order": 1
+        }
+      ]
+    },
+    {
+      "schema": "AddressShape",
+      "constraints": [
+        {
+          "path": "postalCode",
+          "name": "postal code",
+          "datatype": "integer",
+          "description": "The postal code of the locality",
+          "order": 13,
+          "validations": [
+            {
+              "key": "group",
+              "value": "AddressGroup"
+            }
+          ]
+        },
+        {
+          "path": "locality",
+          "name": "locality",
+          "datatype": "string",
+          "description": "The suburb, city or town of the address",
+          "order": 12,
+          "validations": [
+            {
+              "key": "group",
+              "value": "AddressGroup"
+            }
+          ]
+        },
+        {
+          "path": "streetAddress",
+          "name": "street address",
+          "datatype": "string",
+          "description": "The street address including number",
+          "order": 11,
+          "validations": [
+            {
+              "key": "group",
+              "value": "AddressGroup"
+            },
+            {
+              "key": "minLength",
+              "value": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "schema": "PhoneShape",
+      "constraints": [
+        {
+          "path": "number",
+          "name": "number",
+          "datatype": "integer",
+          "minCount": 1,
+          "description": "The phone number",
+          "validations": [
+            {
+              "key": "group",
+              "value": "PhoneGroup"
+            }
+          ]
+        },
+        {
+          "path": "countryCode",
+          "name": "country code",
+          "minCount": 1,
+          "maxCount": 1,
+          "description": "Country code",
+          "validations": [
+            {
+              "key": "group",
+              "value": "PhoneGroup"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,206 @@
+<form [formGroup]="form">
+  <div *ngFor="let formField of inputs; let i = index">
+    <div *ngIf="radioGroup.length > 0">
+      <small>Select a datatype for {{ input.name }} <span *ngIf="input.required" aria-required="true"
+                                                          class="required"></span></small>
+      <br>
+      <mat-radio-group [name]="radioGroupIds[i]">
+        <mat-radio-button (change)="onItemChange(option, i)"
+                          *ngFor="let option of radioGroup"
+                          [checked]='radioButtonsSelected[i] == option' [value]="option.name">
+          {{ option.name }}
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <div [ngSwitch]="radioButtonsSelected[i]['controlType']">
+      <div *ngSwitchCase="'textbox'">
+        <mat-form-field
+          [ngClass]="{'full-width-input': addFullWidthClass(i), 'width-input': addNonFullWidthClass(i)}">
+          <mat-label>{{ formField.name }} <span *ngIf="formField.required" aria-required="true"
+                                                class="required">
+                  </span>
+          </mat-label>
+          <input [formControlName]="formField.id"
+                 [matTooltip]="formField.description[this.translate.currentLang]"
+                 placeholder="{{formField.description[this.translate.currentLang]}}" matInput>
+        </mat-form-field>
+        <button (click)="addInput()" *ngIf="i==0 && displayAddButton" [disabled]="!enableButton" color="primary"
+                mat-icon-button>
+          <mat-icon>add</mat-icon>
+        </button>
+        <button (click)="deleteInput(i)" *ngIf="i>=input.minCount" color="warn" mat-icon-button
+                type="button">
+          <mat-icon>delete icon</mat-icon>
+        </button>
+        <mat-error>
+          <app-show-errors [ctrl]="form.get(formField.id)" [label]="formField.name"></app-show-errors>
+        </mat-error>
+      </div>
+
+      <div *ngSwitchCase="'textbox_integer'">
+        <mat-form-field
+          [ngClass]="{'full-width-input': addFullWidthClass(i), 'width-input': addNonFullWidthClass(i)}">
+          <mat-label>{{ formField.name }} <span *ngIf="formField.required" aria-required="true"
+                                                class="required">
+                  </span>
+          </mat-label>
+          <input [formControlName]="formField.id"
+                 [matTooltip]="formField.description[this.translate.currentLang]"
+                 placeholder="{{formField.description[this.translate.currentLang]}}" appNumeric matInput
+                 type="number">
+        </mat-form-field>
+        <button (click)="addInput()" *ngIf="i==0 && displayAddButton" [disabled]="!enableButton" color="primary"
+                mat-icon-button>
+          <mat-icon>add</mat-icon>
+        </button>
+        <button (click)="deleteInput(i)" *ngIf="i>=input.minCount" color="warn" mat-icon-button
+                type="button">
+          <mat-icon>delete icon</mat-icon>
+        </button>
+        <mat-error>
+          <app-show-errors [ctrl]="form.get(formField.id)" [label]="formField.name"></app-show-errors>
+        </mat-error>
+      </div>
+
+      <div *ngSwitchCase="'textbox_decimal'">
+        <mat-form-field
+          [ngClass]="{'full-width-input': addFullWidthClass(i), 'width-input': addNonFullWidthClass(i)}">
+          <mat-label>{{ formField.name }} <span *ngIf="formField.required" aria-required="true"
+                                                class="required">
+                  </span>
+          </mat-label>
+          <input [formControlName]="formField.id"
+                 [matTooltip]="formField.description[this.translate.currentLang]"
+                 placeholder="{{formField.description[this.translate.currentLang]}}" appNumeric decimals="2"
+                 matInput type="number">
+        </mat-form-field>
+        <button (click)="addInput()" *ngIf="i==0 && displayAddButton" [disabled]="!enableButton" color="primary"
+                mat-icon-button>
+          <mat-icon>add</mat-icon>
+        </button>
+        <button (click)="deleteInput(i)" *ngIf="i>=input.minCount" color="warn" mat-icon-button
+                type="button">
+          <mat-icon>delete icon</mat-icon>
+        </button>
+        <mat-error>
+          <app-show-errors [ctrl]="form.get(formField.id)" [label]="formField.name"></app-show-errors>
+        </mat-error>
+      </div>
+
+      <div *ngSwitchCase="'textbox_uri'">
+        <mat-form-field
+          [ngClass]="{'full-width-input': addFullWidthClass(i), 'width-input': addNonFullWidthClass(i)}">
+          <mat-label>{{ formField.name }} <span *ngIf="formField.required" aria-required="true"
+                                                class="required">
+                  </span>
+          </mat-label>
+          <input [formControlName]="formField.id"
+                 [matTooltip]="formField.description[this.translate.currentLang]"
+                 placeholder="{{formField.description[this.translate.currentLang]}}" matInput>
+        </mat-form-field>
+        <button (click)="addInput()" *ngIf="i==0 && displayAddButton" [disabled]="!enableButton" color="primary"
+                mat-icon-button>
+          <mat-icon>add</mat-icon>
+        </button>
+        <button (click)="deleteInput(i)" *ngIf="i>=input.minCount" color="warn" mat-icon-button
+                type="button">
+          <mat-icon>delete icon</mat-icon>
+        </button>
+        <mat-error>
+          <app-show-errors [ctrl]="form.get(formField.id)" [label]="formField.name"></app-show-errors>
+        </mat-error>
+      </div>
+
+      <div *ngSwitchCase="'datepicker'">
+        <mat-form-field
+          [ngClass]="{'full-width-input': addFullWidthClass(i), 'width-input': addNonFullWidthClass(i)}">
+          <mat-label>{{ formField.name }} <span *ngIf="formField.required" aria-required="true"
+                                                class="required">
+                  </span>
+          </mat-label>
+          <input [formControlName]="formField.id" [matDatepicker]="picker" matInput>
+          <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <button (click)="addInput()" *ngIf="i==0 && displayAddButton" [disabled]="!enableButton" color="primary"
+                mat-icon-button>
+          <mat-icon>add</mat-icon>
+        </button>
+        <button (click)="deleteInput(i)" *ngIf="i>=input.minCount" color="warn" mat-icon-button
+                type="button">
+          <mat-icon>delete icon</mat-icon>
+        </button>
+        <mat-error>
+          <app-show-errors [ctrl]="form.get(formField.id)" [label]="formField.name"></app-show-errors>
+        </mat-error>
+      </div>
+
+      <div *ngSwitchCase="'datetimepicker'">
+        <mat-form-field
+          [ngClass]="{'full-width-input': addFullWidthClass(i), 'width-input': addNonFullWidthClass(i)}">
+          <mat-label>{{ formField.name }} <span *ngIf="formField.required" aria-required="true"
+                                                class="required">
+                  </span>
+          </mat-label>
+          <input [formControlName]="formField.id" [ngxMatDatetimePicker]="picker" matInput>
+          <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+          <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
+        </mat-form-field>
+        <button (click)="addInput()" *ngIf="i==0 && displayAddButton" [disabled]="!enableButton" color="primary"
+                mat-icon-button>
+          <mat-icon>add</mat-icon>
+        </button>
+        <button (click)="deleteInput(i)" *ngIf="i>=input.minCount" color="warn" mat-icon-button
+                type="button">
+          <mat-icon>delete icon</mat-icon>
+        </button>
+        <mat-error>
+          <app-show-errors [ctrl]="form.get(formField.id)" [label]="formField.name"></app-show-errors>
+        </mat-error>
+      </div>
+
+      <div *ngSwitchCase="'dropdown'">
+        <mat-form-field class="full-width-input">
+          <mat-label>{{ formField.name }} <span *ngIf="formField.required" aria-required="true"
+                                                class="required">
+                  </span>
+          </mat-label>
+          <mat-select [formControlName]="formField.id" multiple>
+            <mat-option *ngFor="let option of input.in" [value]="option.value">
+              {{ option.value }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-error>
+          <app-show-errors [ctrl]="form.get(formField.id)" [label]="formField.name"></app-show-errors>
+        </mat-error>
+      </div>
+
+      <div *ngSwitchCase="'dynamicExpanded'">
+        <div *ngIf="formField.childrenFields.length>0; else noShapeFound">
+          <app-expanded-fields [form]="form" [input]="formField" [shapes]="shapes">
+          </app-expanded-fields>
+          <button (click)="addInput()" *ngIf="i==0 && displayAddButton" [disabled]="!enableButton"
+                  color="primary"
+                  mat-icon-button>
+            <mat-icon>add</mat-icon>
+          </button>
+          <button (click)="deleteInput(i)" *ngIf="i>=input.minCount" color="warn" mat-icon-button
+                  type="button">
+            <mat-icon>delete icon</mat-icon>
+          </button>
+        </div>
+        <ng-template #noShapeFound>
+          {{ formField.childrenSchema }} (no shape found)
+        </ng-template>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="inputs.length ===0" fxLayoutAlign="start center">
+    <button (click)="addFirstField()" color="primary" mat-icon-button>
+      <mat-icon>add</mat-icon>
+      {{ input.name }}
+    </button>
+  </div>
+
+</form>

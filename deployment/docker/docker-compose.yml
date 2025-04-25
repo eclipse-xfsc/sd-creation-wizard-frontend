@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+
+  sd-creation-wizard:
+    container_name: sd-creation-wizard
+    image: to_be_changed:latest
+    ports:
+      - '80:80'
+    depends_on:
+      - sd-creation-wizard-api
+    environment:
+      - "API_URL=127.0.0.1:8080"
+
+  sd-creation-wizard-api:
+    container_name: sd-creation-wizard-api
+    image: to_be_changed2:latest
+    ports:
+      - '8080:8080'

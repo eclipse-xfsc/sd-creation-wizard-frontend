@@ -1,0 +1,99 @@
+<div class="register-content">
+  <div *ngIf="!requestSuccess" class="error-message">
+    <mat-error>{{'form.displayError'|translate}}</mat-error>
+  {{reportError('form.displayError')}}
+    <br><br>
+    <a [routerLink]="'/upload'" color="primary" mat-raised-button> {{'form.ttlError'|translate}} </a>
+  </div>
+  <div *ngIf="requestSuccess">
+    <form (ngSubmit)="onSubmit()" [formGroup]="form">
+      <div fxLayout="row wrap" fxLayoutGap="16px grid">
+        <div *ngFor="let group of groupedFormFields;let i = index" [ngClass]="{'position-center': groupsNumber === 1}"
+             fxFlex="40%" fxFlex.sm="40%"
+             fxFlex.xs="100%">
+          <mat-card class="mat-elevation-z4">
+           <h2> {{'form.complete'|translate}} <b>{{shape.name}} </b> {{'form.form'|translate}} </h2>
+           <!--
+           <div class="field">
+             <div class="textField">
+               -->
+              <mat-form-field class="full-width-input" >
+                <mat-label>Credential subject (DID)</mat-label>
+                <input matTooltip="did:example:123456789abcdefghi" formControlName="user_prefix" matInput placeholder="did:example:123456789abcdefghi">
+              </mat-form-field>
+              <!--
+            </div>
+
+              <div class="iconField tooltip">
+                <img src="../../../assets/images/information.svg">
+                <span  class="tooltiptext">Tooltip text</span>
+              </div>
+          </div>
+        -->
+            <mat-card-content>
+              <div *ngFor="let formField of group; let j=index" class="form-group">
+                <span *ngIf="j==0">{{formField.group}}</span>
+                <!--
+                <div class="field">
+                  <div class="textField">
+                  -->
+                <app-dynamic-form-input *ngIf="formField.componentType == 'dynamicFormInput'" [form]="form"
+                                        [input]="formField" [shapes]="file.shapes" ></app-dynamic-form-input>
+                  <!--
+                  </div>
+                        <div class="iconField tooltip">
+                          <img src="../../../assets/images/information.svg">
+                          <span  class="tooltiptext">Tooltip text</span>
+                        </div>
+                </div>
+                -->
+                <app-dynamic-form-array *ngIf="formField.componentType == 'dynamicFormArray'" [form]="form"
+                                        [input]="formField" [shapes]="file.shapes" ></app-dynamic-form-array>
+                <app-dynamic-form-or *ngIf="formField.componentType == 'dynamicFormOr'" [form]="form"
+                                     [input]="formField" [shapes]="file.shapes" ></app-dynamic-form-or>
+                <app-dynamic-form-or-array *ngIf="formField.componentType == 'dynamicFormOrArray'" [form]="form"
+                                           [input]="formField" [shapes]="file.shapes" ></app-dynamic-form-or-array>
+                <app-expanded-fields *ngIf="formField.componentType == 'dynamicExpanded'" [form]="form"
+                                     [input]="formField" [shapes]="file.shapes" ></app-expanded-fields>
+                <app-dynamic-self-loops *ngIf="formField.componentType == 'dynamicSelfLoop'" [form]="form"
+                                        [input]="formField" [shapes]="file.shapes" ></app-dynamic-self-loops>
+              </div>
+            </mat-card-content>
+            <br>
+            <div *ngIf="i==0" class="form-group">
+              <div class="download-format">
+                <small> {{'form.export'|translate}}</small> <br>
+                <mat-radio-group formControlName="download_format">
+                  <mat-radio-button *ngFor="let option of downloadFormatKeys; let i = index"
+                                    [value]="DownloadFormat[option]"
+                                    class="format-label"> {{DownloadFormat[option]}}
+                  </mat-radio-button>
+                </mat-radio-group>
+              </div>
+              <button [disabled]="form.invalid" color="primary" mat-raised-button>{{'form.save'|translate}}</button>
+            </div>
+            <div class="all-errors">
+              <div *ngFor="let formField of group" class="alert alert-danger ">
+                <app-show-errors [displayAll]="true" [formField]="formField" [form]="form" [label]="formField.name">
+                </app-show-errors>
+              </div>
+            </div>
+            <div *ngIf="hasStaticFiles">
+              <button (click)="goToFiles()" class="back-button" color="primary" mat-stroked-button>
+                <mat-icon>arrow_back</mat-icon>
+                {{'form.goBack'|translate}}
+              </button>
+            </div>
+
+            <div *ngIf="multipleShapes" fxLayout="row wrap">
+              <button (click)="goToShapes()" class="back-button" color="primary" mat-stroked-button>
+                <mat-icon>arrow_back</mat-icon>
+                {{'form.goBack'|translate}}
+              </button>
+            </div>
+          </mat-card>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

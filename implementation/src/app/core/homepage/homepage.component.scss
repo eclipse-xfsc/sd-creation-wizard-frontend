@@ -1,0 +1,42 @@
+.content {
+  padding: 16px;
+}
+
+.content > mat-card {
+  width: 200px;
+
+}
+
+.mat-card {
+  margin-right: 20px
+}
+
+.display-image {
+
+  width: 50% !important;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.card-title {
+  text-align: center;
+  color: #673ab7
+}
+
+.card-description {
+  text-align: center;
+  white-space: pre-line;
+}
+
+.primary-div {
+  margin: 40px 0 40px 0
+}
+
+.text-center {
+  text-align: center;
+}
+
+.new-instance {
+  padding-left: 20px;
+}

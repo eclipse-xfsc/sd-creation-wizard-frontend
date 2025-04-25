@@ -1,0 +1,28 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <div class="wrapper">
+    <div class="file-upload">
+      <p>Upload your shape-file here:</p>
+      <input
+        (change)="onFileChange($event, 'fileSource')"
+        accept=".ttl"
+        class="form-control"
+        formControlName="file"
+        id="file"
+        type="file">
+        <p>Upload your optional json-file to prefill your shape-file here:</p>
+        <input
+        (change)="onFileChange($event, 'fileSourceJson')"
+        accept=".json"
+        class="form-control"
+        formControlName="fileJson"
+        id="fileJson"
+        type="file">
+      <button [disabled]="form.invalid" class="upload-button" color="primary" mat-raised-button>Upload</button>
+    </div>
+    <mat-error *ngIf="f.fileSource.errors?.fileExtension">{{'file-upload.typeError'|translate}}</mat-error>
+    <mat-error *ngIf="requestError">
+      <span>{{'file-upload.processError'|translate}}</span><br>
+      <span>{{'file-upload.try'|translate}}</span>
+    </mat-error>
+  </div>
+</form>

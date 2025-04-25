@@ -1,0 +1,145 @@
+mat-card {
+  max-width: 800px;
+  margin: 2em auto;
+  text-align: center;
+}
+body{
+  overflow: auto !important;
+
+}
+.subtitle {
+  text-align: left;
+  margin-top: 12px;
+}
+
+.back-button {
+  display: block;
+  margin: auto;
+}
+
+.position-center {
+
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.all-errors {
+  margin-top: 20px
+}
+
+.full-width-input {
+  width: 100%;
+
+}
+
+.download-format {
+  margin-bottom: 30px;
+  font-size: small;
+}
+
+.format-label {
+  margin-right: 15px;
+}
+
+.error-message {
+  text-align: center;
+  margin-top: 20px
+}
+
+.field{
+  display:flex;
+  flex-direction: row;
+
+}
+.textField{
+  flex: 1;
+}
+.iconField{
+  margin-left:1em;
+  display: flex  !important;
+  align-items: center !important;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted #673ab7;
+}
+
+.tooltip .tooltiptext {
+	display: block;
+	 overflow-wrap: break-word;
+  visibility: hidden;
+
+  max-width: 200px;
+  background-color: #673ab7;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 1em;
+  position: absolute;
+  z-index: 1;
+  top: -5px;
+  left: 110%;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent #673ab7 transparent transparent;
+}
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+//tooltip css
+[data-tip] {
+	position:relative;
+
+}
+[data-tip]:before {
+	content:'';
+	/* hides the tooltip when not hovered */
+	display:none;
+	content:'';
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-bottom: 5px solid #1a1a1a;	
+	position:absolute;
+	top:30px;
+	left:35px;
+	z-index:8;
+	font-size:0;
+	line-height:0;
+	width:0;
+	height:0;
+}
+[data-tip]:after {
+	display:none;
+	content:attr(data-tip);
+	position:absolute;
+	top:35px;
+	left:0px;
+	padding:5px 8px;
+	background:#1a1a1a;
+	color:#fff;
+	z-index:9;
+	font-size: 0.75em;
+	height:18px;
+	line-height:18px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	white-space:nowrap;
+	word-wrap:normal;
+}
+[data-tip]:hover:before,
+[data-tip]:hover:after {
+	display:block;
+}

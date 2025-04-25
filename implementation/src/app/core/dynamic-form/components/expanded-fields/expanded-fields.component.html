@@ -1,0 +1,57 @@
+<div class="expanded">
+  <form [formGroup]="form">
+    <div *ngIf="!input.required && formGroups.length == 0" flex fxLayoutAlign="start center" layout="row">
+      <button (click)="addInitialShape()" [disabled]="!enableButton" color="primary" mat-icon-button>
+        <mat-icon>add</mat-icon>
+        {{input.name}}
+      </button>
+    </div>
+    <mat-accordion *ngFor="let nestedShapeForm of formGroups; let i = index">
+      <mat-expansion-panel (closed)="panelOpenState = false" (opened)="panelOpenState = true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{inputs[i].name}} - {{inputs[i].childrenSchema}} <span *ngIf="input.required" aria-required="true"
+                                                                    class="required"></span>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div [formGroup]="nestedShapeForm">
+          <mat-error *ngIf="inputs[i].childrenFields.length==0">
+            The shape does not exist in the file.
+          </mat-error>
+          <div *ngFor="let child of inputs[i].childrenFields">
+            <app-dynamic-form-input *ngIf="child.componentType == 'dynamicFormInput'" [form]="nestedShapeForm"
+                                    [input]="child" [shapes]="shapes"></app-dynamic-form-input>
+            <app-dynamic-form-array *ngIf="child.componentType == 'dynamicFormArray'" [form]="nestedShapeForm"
+                                    [input]="child" [shapes]="shapes"></app-dynamic-form-array>
+            <app-dynamic-form-or *ngIf="child.componentType == 'dynamicFormOr'" [form]="nestedShapeForm" [input]="child"
+                                 [shapes]="shapes"></app-dynamic-form-or>
+            <app-dynamic-form-or-array *ngIf="child.componentType == 'dynamicFormOrArray'" [form]="nestedShapeForm"
+                                       [input]="child" [shapes]="shapes"></app-dynamic-form-or-array>
+            <app-expanded-fields *ngIf="child.componentType == 'dynamicExpanded' && !child.selfLoop"
+                                 [form]="nestedShapeForm"
+                                 [input]="child" [parentId]="input.id" [shapes]="shapes"></app-expanded-fields>
+            <app-dynamic-self-loops *ngIf="child.selfLoop" [form]="nestedShapeForm" [input]="child"
+                                    [parentId]="input.id" [shapes]="shapes">
+            </app-dynamic-self-loops>
+          </div>
+        </div>
+      </mat-expansion-panel>
+
+      <div flex fxLayoutAlign="start center" layout="row">
+        <mat-error>
+          <app-show-errors [ctrl]="nestedShapeForm" [label]="input.name"></app-show-errors>
+        </mat-error>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <button (click)="addInput()" *ngIf="i==0 && displayAddButton" [disabled]="!enableButton" color="primary"
+                mat-icon-button>
+          <mat-icon>add</mat-icon>
+          {{input.name}}
+        </button>
+        <button (click)="deleteInput(i)" *ngIf="displayDeleteButton(i)" color="warn" mat-icon-button type="button">
+          <mat-icon>delete icon</mat-icon>
+        </button>
+      </div>
+    </mat-accordion>
+  </form>
+</div>

@@ -1,0 +1,58 @@
+{
+  "startingPage":{
+    "headline": "SD-Creation Wizard",
+    "generate":"Create Self-Descriptions Based on",
+    "erstellen": "Schemata",
+    "started":"Get Started",
+    "data":"Data protetcion",
+    "select":"Select Gaia-X Object",
+    "form":"A Tailored Input Form is Generated",
+    "create":"Enter Details for Your Instance",
+    "export":"Export Self-Description",
+    "steps":"In 4 steps...",
+    "imprint":"Imprint"
+  },
+  "select-shape":{
+
+    "multiError" :" We have identified multiple shapes in the file you upload. Please",
+    "multiError2":"choose the shape",
+    "multiError3":"you want to use for creation.",
+    "error":"There was an error displaying the shapes. Please try it again."
+  },
+  "select-file":{
+    "select": "Select a SHACL shape or ",
+    "upload":"Upload",
+    "uploadButton": "Upload",
+    "uploadShape":"Upload Shape",
+    "shape":"a SHACL Schema",
+    "participant":" Participant shapes",
+    "service":"Service Offering shapes",
+    "default":" Resource shapes",
+    "search": "Search Shapes... (in development)",
+    "selectEco":"Select Ecosystem: "
+
+  },
+  "home":{
+    "headline": "SD-Creation"
+  },
+  "file-upload":{
+    "typeError": "Please upload a .ttl file.",
+    "processError": "There was an error trying to process your .ttl file. ",
+    "try": "Please try it again."
+
+  },
+  "form":{
+    "displayError":"The form cannot be displayed.",
+    "complete":"Complete",
+    "form":"Form",
+    "goBack":"Go Back to Selection of Files",
+    "ttlError":"Please upload a .ttl file",
+    "export":"Select export format",
+    "save":"Save"
+
+
+
+  }
+
+}
+

@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sd-creation-wizard-frontend
+  namespace: argocd
+spec:
+  destination:
+    namespace: sd-tooling
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: manifests
+    plugin:
+      name: helmfile
+    repoURL: https://gitlab.com/gaia-x/data-infrastructure-federation-services/self-description-tooling/sd-creation-wizard/sd-creation-wizard-frontend.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      selfHeal: true

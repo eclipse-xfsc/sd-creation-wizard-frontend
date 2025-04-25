@@ -1,0 +1,19 @@
+<div *ngIf="requestSuccess">
+  <mat-card class="info-message">
+    <p>{{'select-shape.multiError' | translate}}<b>{{'select-shape.multiError2' | translate}}</b>{{'select-shape.multiError3' | translate}} </p>
+  </mat-card>
+
+  <div fxLayout="row wrap" fxLayoutGap="16px grid">
+    <div *ngFor="let shape of shapes" fxFlex="20%" fxFlex.sm="20%" fxFlex.xs="100%">
+      <button (click)="navigate(shape.schema)" [matTooltip]="shape.toolTipText" class="shape" color="primary"
+              mat-stroked-button>
+        <mat-icon>library_add</mat-icon>
+        {{shape.name}}</button>
+
+    </div>
+  </div>
+</div>
+<app-file-upload></app-file-upload>
+<div class="error-request">
+  <mat-error *ngIf="!requestSuccess">{{'select-shape.error' | translate}}</mat-error>
+</div>

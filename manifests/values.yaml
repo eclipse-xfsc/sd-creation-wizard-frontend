@@ -1,0 +1,75 @@
+nameOverride: sd-creation-wizard-frontend
+fullnameOverride: sd-creation-wizard-frontend
+common:
+  labels:
+    standard:
+      app.kubernetes.io/version: v0.0.1
+      app.kubernetes.io/component: frontend
+      app.kubernetes.io/part-of: sd-creation-wizard
+  env:
+    API_URL: https://sd-creation-wizard.gxfs.dev/api
+serviceAccount:
+  create: true
+ingresses:
+  default:
+    enabled: true
+    port: 80
+    hosts:
+      "sd-creation-wizard.gxfs.dev": /
+    tls:
+      - secretName: wildcard-gxfs-dev
+        hosts:
+          - sd-creation-wizard.gxfs.dev
+service:
+  enabled: true
+  type: ClusterIP
+  ports:
+    web:
+      internal: 80
+      external: 80
+deployments:
+  default:
+    enabled: true
+    replicas: 2
+    revisionHistoryLimit: 10
+    pdb:
+      enabled: true
+      minAvailable: 1
+    pod:
+      pullSecrets:
+        - "regcred-sd-creation-wizard-frontend"
+    affinity:
+      # use of simple rule
+      affinityRule: "ShouldBeOnDifferentNode"
+    containers:
+      - repository: registry.gitlab.com/gaia-x/data-infrastructure-federation-services/self-description-tooling/sd-creation-wizard/sd-creation-wizard-frontend/frontend
+        tag: "148eb831"
+        pullPolicy: Always
+        probes:
+          # Checks if application has finished starting - restarts the container on fail
+          startupProbe:
+            httpGet:
+              path: /
+              port: 80
+            failureThreshold: 3
+            periodSeconds: 2
+            initialDelaySeconds: 5
+          # Checks if application is alive - restarts the container on fail
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            failureThreshold: 3
+            periodSeconds: 10
+          # Checks if application is ready to serve traffic - removes it from service endpoint on fail
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 5
+    #  resources:
+    #    requests:
+    #      memory: "200Mi"
+    #      cpu: "200m"

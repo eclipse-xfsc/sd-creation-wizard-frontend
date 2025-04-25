@@ -1,0 +1,96 @@
+<form [formGroup]="form">
+  <div *ngIf="input.or.length > 1">
+    <small>Select a datatype for {{ input.name }} </small> <br>
+    <mat-radio-group [name]="groupName">
+      <mat-radio-button (change)="onItemChange(option)"
+                        *ngFor="let option of radioGroup;" [checked]='radioButtonSelected === option'
+                        [value]="option">
+        {{ option['name'] }}
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+
+  <div [ngSwitch]="radioButtonSelected['controlType']">
+    <div *ngSwitchCase="'textbox'">
+      <mat-form-field class="full-width-input">
+        <mat-label>{{ input.name }} <span *ngIf="input.required" aria-required="true" class="required"></span>
+        </mat-label>
+        <input [formControlName]="input.id" [matTooltip]="input.description[this.translate.currentLang]"
+               [placeholder]="input.name" matInput>
+      </mat-form-field>
+      <mat-error>
+        <app-show-errors [ctrl]="form.get(input.id)"
+                         [label]="input.name"></app-show-errors>
+      </mat-error>
+    </div>
+    <div *ngSwitchCase="'textbox_integer'">
+      <mat-form-field class="full-width-input">
+        <mat-label>{{ input.name }} <span *ngIf="input.required" aria-required="true" class="required"></span>
+        </mat-label>
+        <input [formControlName]="input.id" [matTooltip]="input.name" [placeholder]="input.name" appNumeric matInput
+               type="number">
+      </mat-form-field>
+      <mat-error>
+        <app-show-errors
+          [ctrl]="form.get(input.id)"
+          [label]="input.name"></app-show-errors>
+      </mat-error>
+    </div>
+    <div *ngSwitchCase="'textbox_decimal'">
+      <mat-form-field class="full-width-input">
+        <mat-label>{{ input.name }} <span *ngIf="input.required" aria-required="true" class="required"></span>
+        </mat-label>
+        <input [id]="input.id" [matTooltip]="input.name" [placeholder]="input.name" appNumeric decimals="2" matInput
+               type="number">
+      </mat-form-field>
+      <mat-error>
+        <app-show-errors
+          [ctrl]="form.get(input.id)"
+          [label]="input.name"></app-show-errors>
+      </mat-error>
+    </div>
+    <div *ngSwitchCase="'textbox_uri'">
+      <mat-form-field class="full-width-input">
+        <mat-label>{{ input.name }} <span *ngIf="input.required" aria-required="true" class="required"></span>
+        </mat-label>
+        <input [formControlName]="input.id" [matTooltip]="input.name" [placeholder]="input.name" matInput>
+      </mat-form-field>
+      <mat-error>
+        <app-show-errors
+          [ctrl]="form.get(input.id)"
+          [label]="input.name"></app-show-errors>
+      </mat-error>
+    </div>
+    <div *ngSwitchCase="'datepicker'">
+      <mat-form-field class="full-width-input">
+        <mat-label>{{ input.name }} <span *ngIf="input.required" aria-required="true" class="required"></span>
+        </mat-label>
+        <input [formControlName]="input.id" [matDatepicker]="picker" matInput>
+        <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-error>
+        <app-show-errors [ctrl]="form.get(input.id)" [label]="input.name"></app-show-errors>
+      </mat-error>
+    </div>
+    <div *ngSwitchCase="'datetimepicker'">
+      <mat-form-field class="full-width-input">
+        <mat-label>{{ input.name }} <span *ngIf="input.required" aria-required="true" class="required"></span>
+        </mat-label>
+        <input [formControlName]="input.id" [ngxMatDatetimePicker]="picker" matInput>
+        <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+        <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
+      </mat-form-field>
+      <mat-error>
+        <app-show-errors [ctrl]="form.get(input.id)" [label]="input.name"></app-show-errors>
+      </mat-error>
+    </div>
+    <div *ngSwitchCase="'dynamicExpanded'">
+      <app-expanded-fields *ngIf="input.childrenFields; else noShapeFound" [form]="form" [input]="input"
+                           [shapes]="shapes"></app-expanded-fields>
+      <ng-template #noShapeFound>
+        {{ input.childrenSchema }} (no shape found)
+      </ng-template>
+    </div>
+  </div>
+</form>

@@ -160,6 +160,11 @@ Exported TTL:
 ```
 
 ## Development
+
+### Local Docker build
+Use the following command from the project root to build the Docker image:
+`docker build -f deployment/docker/Dockerfile -t mein-image .`
+
 The project is based on angular and Node, before cloning the repository make sure you have the following prerequists:
 
 ### Prerequisits for local development

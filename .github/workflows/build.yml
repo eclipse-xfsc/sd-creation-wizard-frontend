@@ -12,8 +12,7 @@ jobs:
 
     env:
       PROJECT_DIR: . # Nutze das GitHub Projektverzeichnis
-      CLI_VERSION: latest # Passe hier die Angular CLI Version an (falls gewünscht)
-
+      
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -38,7 +37,7 @@ jobs:
           node node_modules/.bin/webdriver-manager update --versions.chrome=102.0.5005.61
 
       - name: Build Application
-        uses: docker://trion/ng-cli:${{ env.CLI_VERSION }}
+        uses: docker://trion/ng-cli:latest
         with:
           args: ng build --configuration production
 

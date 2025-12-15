@@ -42,7 +42,7 @@ jobs:
           args: ng build --configuration production
 
       - name: Upload Build Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: dist
           path: ${{ env.PROJECT_DIR }}/dist

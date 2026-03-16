@@ -6,8 +6,17 @@
   <base href="/">
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <link href="favicon.ico" rel="icon" type="image/x-icon">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script>
+    // Load Google Fonts at runtime to avoid Angular build-time inlining
+    // (the InlineFontsProcessor crashes when fonts.googleapis.com is unreachable)
+    ['https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap',
+     'https://fonts.googleapis.com/icon?family=Material+Icons'
+    ].forEach(function(href) {
+      var l = document.createElement('link');
+      l.rel = 'stylesheet'; l.href = href;
+      document.head.appendChild(l);
+    });
+  </script>
   <script src="assets/env.js"></script>
 </head>
 <body class="mat-typography">
